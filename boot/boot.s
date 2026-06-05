@@ -1,4 +1,3 @@
-; arm bootloader
 .code16
 .org 0x7c00
 
