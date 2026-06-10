@@ -31,8 +31,8 @@ print_string:
     ret
 
 message:
-    .ascii "LARPIX bootloader loaded.\r\n"
+    .ascii "Loaded.\r\n"
     .byte 0
 
-    .fill 510-($-$$), 1, 0
+    .org 510
     .word 0xaa55
