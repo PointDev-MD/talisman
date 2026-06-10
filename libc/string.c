@@ -1,0 +1,24 @@
+#include <stddef.h>
+
+size_t strlen(const char *s) {
+    const char *p = s;
+    while (*p) {
+        p++;
+    }
+    return (size_t)(p - s);
+}
+
+char *strcpy(char *dest, const char *src) {
+    char *d = dest;
+    while ((*d++ = *src++)) {
+    }
+    return dest;
+}
+
+int strcmp(const char *a, const char *b) {
+    while (*a && (*a == *b)) {
+        a++;
+        b++;
+    }
+    return *(unsigned char *)a - *(unsigned char *)b;
+}
