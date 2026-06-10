@@ -34,5 +34,5 @@ message:
     .ascii "Loaded.\r\n"
     .byte 0
 
-    .org 510
+    .org 0x7dfe
     .word 0xaa55
