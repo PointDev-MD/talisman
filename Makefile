@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /usr/bin/bash
 
 AS = as --32
 LD = ld -m elf_i386
