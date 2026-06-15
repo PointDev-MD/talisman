@@ -1,7 +1,7 @@
 SHELL := /usr/bin/bash
 
 AS = as --32
-LD = ld -m elf_i386
+LD = ld -m i386pe
 OBJCOPY = objcopy
 
 SRC = boot/boot.s
