@@ -1,29 +1,27 @@
 #include <stdint.h>
-
-static volatile uint16_t *const VGA_BUFFER = (uint16_t *)0xB8000;
-static uint16_t cursor_pos = 0;
-
-static void put_char(char c, uint8_t color) {
-    if (c == '\n') {
-        cursor_pos = ((cursor_pos / 80) + 1) * 80;
-        return;
-    }
-
-    VGA_BUFFER[cursor_pos++] = (uint16_t)c | ((uint16_t)color << 8);
-
-    if (cursor_pos >= 80 * 25) {
-        cursor_pos = 0;
-    }
-}
-
-static void print(const char *str) {
-    while (*str) {
-        put_char(*str++, 0x0F);
-    }
-}
+#include "../gui/gui.h"
+#include "../gui/window.h"
+#include "../gui/button.h"
+#include "../gui/label.h"
+#include "../libc/stdlib.h"
 
 void kernel_main(void) {
-    print("larpix kernel started\n");
+    malloc_init();
+    
+    GUI *gui = gui_init();
+    if (gui) {
+        Desktop *desktop = gui_get_desktop(gui);
+        
+        Window *main_window = window_new("System");
+        if (main_window) {
+            window_set_position(main_window, 5, 2);
+            window_set_size(main_window, 40, 15);
+            desktop_add_window(desktop, main_window);
+        }
+        
+        gui_run(gui);
+    }
+    
     for (;;) {
         __asm__("hlt");
     }
