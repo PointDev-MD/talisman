@@ -3,14 +3,15 @@
 
 #include "widget.h"
 
-typedef void (*ButtonCallback)(struct Button *btn);
+typedef struct Button Button;
+typedef void (*ButtonCallback)(Button *btn);
 
-typedef struct {
+struct Button {
     Widget base;
     char label[32];
     ButtonCallback callback;
     int pressed;
-} Button;
+};
 
 Button *button_new(const char *label);
 void button_destroy(Button *btn);

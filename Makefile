@@ -20,8 +20,8 @@ LD_SCRIPT = linker.ld
 
 CFLAGS = -m32 -nostdlib -fno-builtin -fno-stack-protector -ffreestanding -I. -Ilibc
 ASFLAGS =
-LDFLAGS = -T $(LD_SCRIPT) -e _start
-KERNEL_LDFLAGS = -Ttext 0x10000 -e kernel_main
+BOOT_LDFLAGS = -Ttext 0x7c00 -e _start
+KERNEL_LDFLAGS = -T $(LD_SCRIPT) -e kernel_main
 OBJCOPYFLAGS = -O binary
 
 .PHONY: all clean run
@@ -32,7 +32,7 @@ $(BOOT_OBJ): $(BOOT_SRC)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(BOOT_BIN): $(BOOT_OBJ)
-	$(LD) $(LDFLAGS) -o boot.elf $<
+	$(LD) -m elf_i386 $(BOOT_LDFLAGS) -o boot.elf $<
 	$(OBJCOPY) $(OBJCOPYFLAGS) boot.elf $@
 
 %.o: %.c
