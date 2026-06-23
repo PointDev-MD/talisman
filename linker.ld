@@ -1,9 +1,9 @@
 OUTPUT_ARCH(i386)
-ENTRY(_start)
+ENTRY(kernel_main)
 
 SECTIONS
 {
-    . = 0x7c00;
+    . = 0x10000;
 
     .text :
     {
